@@ -1,0 +1,18 @@
+# Python 3.12.x pinned -- see README "Python version" note.
+# UNCONFIRMED at build time (no network/PyPI access in this environment):
+# verify pyodbc, pandas, pydantic, and tenacity all publish wheels for your
+# exact target Python patch version before deploying, per the build prompt's
+# instruction to check PyPI before pinning. Versions below are known-good,
+# broadly-available versions as of this app's authoring; re-pin after that
+# check if newer patch releases are preferred.
+
+pyodbc==5.1.0
+pandas==2.2.3
+pydantic==2.9.2
+PyYAML==6.0.2
+requests==2.32.3
+tenacity==9.0.0
+
+# Test dependencies
+pytest==8.3.3
+pytest-mock==3.14.0
