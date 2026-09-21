@@ -1,0 +1,29 @@
+# Dev environment config. Points at dev-only folders/tables so a broken dev
+# run can never touch prod data. Secrets (SQL conn string, Demandbase token)
+# are NOT here -- they come from environment variables, see README.
+
+paths:
+  staging_dir: "./staging/dev"
+  archive_dir: "./archive/dev"
+  error_dir: "./error/dev"
+  run_log_dir: "./logs/dev/runs"
+  all_runs_error_log: "./logs/dev/all_runs_errors.log"
+  retention_days: 90
+
+database:
+  view_fqname: "[marketing_bi].[EDA-268].[vw__demandbase_Opportunity_import]"
+  jobs_table_fqname: "[marketing_bi].[EDA-268].[tbl__demandbase_jobs]"
+  records_table_fqname: "[marketing_bi].[EDA-268].[tbl__demandbase_records]"
+  dsn_env_var: "DEMANDBASE_SYNC_SQL_CONN_STR_DEV"
+
+demandbase:
+  base_url: "https://uapi.demandbase.com"
+  token_env_var: "DEMANDBASE_API_TOKEN_DEV"
+  max_records_per_batch: 5000   # UNCONFIRMED placeholder -- see README
+  create_job_on_empty_changeset: false
+
+watermark:
+  initial_watermark_utc: "2000-01-01T00:00:00Z"  # UNCONFIRMED go-live date
+
+field_mapping_path: "./field_mapping.yaml"
+one_run_per_calendar_day: false

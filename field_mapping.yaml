@@ -23,151 +23,147 @@
 # them is a one-line edit per row below -- nothing else in the codebase
 # needs to change.
 
-- source_field: CHANGEME__SFDC_ID
-  target_field: SFDC_OpportunityId
+- source_field: SFDC_OpportunityId
+  target_field: recordTypeId
   transform: none
   required: true
+#
+#- source_field: CHANGEME__Account_Name
+#  target_field: account_name
+#  transform: none
+#  required: true
+#
+#- source_field: CHANGEME__Account_Domain
+#  target_field: account_domain
+#  transform: none
+#  required: false
+#  default: ""
+#
+#- source_field: CHANGEME__Customer_Type
+#  target_field: customer_type
+#  transform: none
+#  required: false
+#  default: ""
+#
+#- source_field: CHANGEME__Opportunity_Type
+#  target_field: Type
+#  transform: none
+#  required: false
+#  default: ""
+#
+#- source_field: CHANGEME__Service_Type
+#  target_field: service_type
+#  transform: none
+#  required: false
+#  default: ""
+#
+#- source_field: CHANGEME__Service_Type_2
+#  target_field: service_type2
+#  transform: none
+#  required: false
+#  default: ""
+#
+#- source_field: CHANGEME__Opportunity_Name
+#  target_field: Opportunity Name
+#  transform: none
+#  required: true
+#
+#- source_field: CreatedDate
+#  target_field: Created Date
+#  transform: "date_format:%Y-%m-%d"
+#  required: true
+#
+#- source_field: CHANGEME__Expected_Close_Date
+#  target_field: expected_close
+#  transform: "date_format:%Y-%m-%d"
+#  required: false
+#  default: null
+#
+#- source_field: CHANGEME__Close_Date
+#  target_field: Close Date
+#  transform: "date_format:%Y-%m-%d"
+#  required: false
+#  default: null
+#
+#- source_field: CHANGEME__IsClosed
+#  target_field: Is Closed?
+#  transform: bool_to_yn
+#  required: false
+#  default: "N"
+#
+#- source_field: CHANGEME__IsWon
+#  target_field: Is Won?
+#  transform: bool_to_yn
+#  required: false
+#  default: "N"
+#
+#- source_field: CHANGEME__StageName
+#  target_field: Stage
+#  transform: none
+#  required: true
+#
+#- source_field: CHANGEME__Amount_MRR
+#  target_field: amount_mrr
+#  transform: decimal_round_2
+#  required: false
+#  default: 0.0
 
-- source_field: CHANGEME__Account_Name
-  target_field: account_name
-  transform: none
-  required: true
-
-- source_field: CHANGEME__Account_Domain
-  target_field: account_domain
-  transform: none
-  required: false
-  default: ""
-
-- source_field: CHANGEME__Customer_Type
-  target_field: customer_type
-  transform: none
-  required: false
-  default: ""
-
-- source_field: CHANGEME__Opportunity_Type
-  target_field: Type
-  transform: none
-  required: false
-  default: ""
-
-- source_field: CHANGEME__Service_Type
-  target_field: service_type
-  transform: none
-  required: false
-  default: ""
-
-- source_field: CHANGEME__Service_Type_2
-  target_field: service_type2
-  transform: none
-  required: false
-  default: ""
-
-- source_field: CHANGEME__Opportunity_Name
-  target_field: Opportunity Name
-  transform: none
-  required: true
-
-- source_field: CreatedDate
-  target_field: Created Date
-  transform: "date_format:%Y-%m-%d"
-  required: true
-
-- source_field: CHANGEME__Expected_Close_Date
-  target_field: expected_close
-  transform: "date_format:%Y-%m-%d"
-  required: false
-  default: null
-
-- source_field: CHANGEME__Close_Date
-  target_field: Close Date
-  transform: "date_format:%Y-%m-%d"
-  required: false
-  default: null
-
-- source_field: CHANGEME__IsClosed
-  target_field: Is Closed?
-  transform: bool_to_yn
-  required: false
-  default: "N"
-
-- source_field: CHANGEME__IsWon
-  target_field: Is Won?
-  transform: bool_to_yn
-  required: false
-  default: "N"
-
-- source_field: CHANGEME__StageName
-  target_field: Stage
-  transform: none
-  required: true
-
-- source_field: CHANGEME__Amount_MRR
-  target_field: amount_mrr
+- source_field: AmountConsumption
+  target_field: amount_consumption_tbd
   transform: decimal_round_2
   required: false
   default: 0.0
 
-- source_field: CHANGEME__Amount_Consumption
-  target_field: amount_consumption
+#- source_field: CHANGEME__Amount_ProServ
+#  target_field: amount_proserv
+#  transform: decimal_round_2
+#  required: false
+#  default: 0.0
+
+#- source_field: CHANGEME__Pipeline_MRR
+#  target_field: pipeline_mrr
+#  transform: decimal_round_2
+#  required: false
+#  default: 0.0
+
+- source_field: PipelineConsumption
+  target_field: projectedTotalConsumptionRevenue__c
   transform: decimal_round_2
   required: false
   default: 0.0
 
-- source_field: CHANGEME__Amount_ProServ
-  target_field: amount_proserv
-  transform: decimal_round_2
-  required: false
-  default: 0.0
+#- source_field: CHANGEME__Pipeline_ProServe
+#  target_field: pipeline_proserve
+#  transform: decimal_round_2
+#  required: false
+#  default: 0.0
 
-- source_field: CHANGEME__Pipeline_MRR
-  target_field: pipeline_mrr
-  transform: decimal_round_2
-  required: false
-  default: 0.0
-
-- source_field: CHANGEME__Pipeline_Consumption
-  target_field: pipeline_consumption
-  transform: decimal_round_2
-  required: false
-  default: 0.0
-
-- source_field: CHANGEME__Pipeline_ProServe
-  target_field: pipeline_proserve
-  transform: decimal_round_2
-  required: false
-  default: 0.0
-
-# FLAGGED OPEN ITEM (see README): unclear whether "AE Name" and "Owner" map
-# to two distinct Salesforce fields or the same underlying field. Wired here
-# as two distinct source columns -- change one to match the other's
-# source_field if they turn out to be the same.
-- source_field: CHANGEME__AE_Name
-  target_field: AE Name
-  transform: none
-  required: false
-  default: ""
-
-- source_field: CHANGEME__Owner_Name
-  target_field: Owner
-  transform: none
-  required: false
-  default: ""
-
-- source_field: CHANGEME__Probability
-  target_field: Probability
-  transform: decimal_round_2
-  required: false
-  default: 0.0
-
-- source_field: CHANGEME__Territory
-  target_field: Territory
-  transform: none
-  required: false
-  default: ""
-
-- source_field: CHANGEME__Target_Account
-  target_field: Target Account
-  transform: bool_to_yn
-  required: false
-  default: "N"
+#- source_field: CHANGEME__AE_Name
+#  target_field: AE Name
+#  transform: none
+#  required: false
+#  default: ""
+#
+#- source_field: CHANGEME__Owner_Name
+#  target_field: Owner
+#  transform: none
+#  required: false
+#  default: ""
+#
+#- source_field: CHANGEME__Probability
+#  target_field: Probability
+#  transform: decimal_round_2
+#  required: false
+#  default: 0.0
+#
+#- source_field: CHANGEME__Territory
+#  target_field: Territory
+#  transform: none
+#  required: false
+#  default: ""
+#
+#- source_field: CHANGEME__Target_Account
+#  target_field: Target Account
+#  transform: bool_to_yn
+#  required: false
+#  default: "N"
