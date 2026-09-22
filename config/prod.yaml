@@ -1,0 +1,29 @@
+# Prod environment config. Points at prod-only folders/tables so a broken
+# prod run can never touch other environments' data. Secrets (SQL conn string, Demandbase token)
+# are NOT here -- they come from environment variables, see README.
+
+paths:
+  staging_dir: "./staging/prod"
+  archive_dir: "./archive/prod"
+  error_dir: "./error/prod"
+  run_log_dir: "./logs/prod/runs"
+  all_runs_error_log: "./logs/prod/all_runs_errors.log"
+  retention_days: 90
+
+database:
+  view_fqname: "[marketing_bi].[EDA-268].[vw__demandbase_Opportunity_import]"
+  jobs_table_fqname: "[marketing_bi].[EDA-268].[tbl__demandbase_jobs]"
+  records_table_fqname: "[marketing_bi].[EDA-268].[tbl__demandbase_records]"
+  dsn_env_var: "DEMANDBASE_SYNC_SQL_CONN_STR_PROD"
+
+demandbase:
+  base_url: "https://uapi.demandbase.com"
+  token_env_var: "DEMANDBASE_API_TOKEN_PROD"
+  max_records_per_batch: 25
+  create_job_on_empty_changeset: false
+
+watermark:
+  initial_watermark_utc: "2000-01-01T00:00:00Z"  # UNCONFIRMED go-live date
+
+field_mapping_path: "./field_mapping.yaml"
+one_run_per_calendar_day: false

@@ -16,7 +16,7 @@ non-functional behavior if left unconfirmed.
 
 ### 1.1 Python version
 
-**Python 3.12.x**
+Python 3.12.x
 
 
 ### 1.2 Install dependencies
@@ -81,7 +81,8 @@ Schedule `python run.py --env prod` to run once daily. In the task's
 **Settings** tab, enable *"If the task is already running, do not start a
 new instance"* — this is a scheduling-level safeguard in addition to (not a
 replacement for) the application-level check that blocks a second run from
-doing new work while a job is `IN_PROGRESS` (see §3.2). exe path: .venv/Scripts/python.exe
+doing new work while a job is `IN_PROGRESS` (see §3.2). 
+exe path: .venv/Scripts/python.exe
 
 ---
 
@@ -263,13 +264,6 @@ silently resolve. None of these block the code from running end-to-end
 against mocks, but several will produce wrong behavior against the real
 Demandbase API or the real business data until confirmed:
 
-1. **Are the 25 Demandbase field names literal CSV headers, or display
-   labels standing in for different machine keys?** Fields with spaces/
-   punctuation (`Opportunity Name`, `Is Closed?`, `Is Won?`, `AE Name`,
-   `Target Account`) are used verbatim as `target_field` in
-   `field_mapping.yaml` right now. Changing them, if they turn out to be
-   display labels, is a one-line edit per affected row — nothing else in
-   the codebase needs to change.
 2. **The Demandbase polling/status endpoint URL and response shape are not
    confirmed.** `demandbase_client.HttpStatusPoller` implements a plausible
    `GET {base_url}/import/v1/job/{id}` guess purely so the pipeline has
@@ -277,20 +271,6 @@ Demandbase API or the real business data until confirmed:
    ENDPOINT ***` in code and must be corrected (or replaced) once Demandbase
    confirms the real contract. Because polling goes through the injectable
    `StatusPoller` protocol, this is a contained, one-class change.
-3. **Max lengths or picklist/enum constraints Demandbase enforces** on
-   fields like `Stage` or `customer_type` are unknown. If Demandbase
-   rejects a value, it will currently show up as a per-record failure (if
-   per-record detail is available) or a conservative batch-level failure
-   (if not) — add `truncate:<N>` or `lookup_map:{...}` transforms to the
-   relevant mapping rows once the real constraints are known.
-4. **Whether a Demandbase sandbox environment exists** for running this
-   test suite (and a manual smoke test) against something other than
-   production before go-live is unknown.
-5. **Whether `AE Name` and `Owner` map to the same Salesforce field or two
-   distinct fields.** Wired in `field_mapping.yaml` as two distinct
-   `CHANGEME__` source columns right now (`CHANGEME__AE_Name` and
-   `CHANGEME__Owner_Name`) — point them at the same real column if they
-   turn out to be the same field.
 6. **Demandbase's actual per-job upload limits** (record count and/or file
    size), and whether job creation is itself rate-limited, are unknown.
    `demandbase.max_records_per_batch` defaults to `5000` as a conservative
@@ -311,9 +291,6 @@ Demandbase API or the real business data until confirmed:
     are zero changed records** is a config flag
     (`demandbase.create_job_on_empty_changeset`, default `False`), not a
     hardcoded behavior — confirm the desired default before go-live.
-11. **Python 3.12 vs 3.13/3.14**: pin was chosen without the PyPI wheel
-    availability check the build prompt asked for, since this environment
-    has no network access — perform that check before deploying (§1.1).
 12. **The verification test run described in §4** used hand-written local
     shims of pydantic/tenacity instead of the real libraries, because this
     build environment had no PyPI access. Re-run `pytest` with the real
