@@ -196,7 +196,7 @@ class DemandbaseClient:
 
         while True:
             result = self._poller.get_status(job_id)
-            if result.status in ("SUCCESS", "PARTIAL_SUCCESS", "FAILED"):
+            if result.status in ("completed", "processing", "new", "failed"):
                 return result
 
             if elapsed >= cfg.poll_max_total_seconds:
@@ -247,13 +247,13 @@ class HttpStatusPoller:
                 f"Polling response for job {job_id} was not valid JSON: {response.text[:500]}"
             ) from exc
 
-        # ASSUMED shape -- adjust once the real contract is confirmed.
+        # ASSUMED shape -- adjust once recordErrors is confirmed.
         return JobStatusResult(
             job_id=job_id,
-            status=data.get("status", "RUNNING"),
-            records_sent=data.get("recordsSent"),
-            records_succeeded=data.get("recordsSucceeded"),
-            records_failed=data.get("recordsFailed"),
+            status=data.get("state", "RUNNING"),
+            records_sent=data.get("totalRowsIngested"),
+            records_succeeded=data.get("totalValidRecords"),
+            records_failed=data.get("totalInvalidRecords"),
             record_errors=data.get("recordErrors", []),
             raw=data,
         )

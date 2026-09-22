@@ -20,9 +20,12 @@ from pydantic import BaseModel, model_validator
 from .transforms import TransformError, apply_transform
 
 REQUIRED_TARGET_FIELDS: List[str] = [
-    "recordTypeId",
-    "amount_consumption_tbd",
-    "projectedTotalConsumptionRevenue__c"
+    "Opportunity ID",
+    "Opportunity Name",
+    "Type",
+    "Created Date",
+    "Owner",
+    "Account Name"
 ]
 
 

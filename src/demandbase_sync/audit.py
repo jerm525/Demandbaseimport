@@ -110,7 +110,7 @@ def insert_record_rows(
     cur.executemany(
         f"""
         INSERT INTO {records_table_fqname}
-            (SFDC_OpportunityId, JobId, SyncTimestamp, CreatedDate, LastModifiedDate,
+            (SFDC_OpportunityId, JobId, SyncTimestamp, SourceCreatedDate, SourceModifiedDate,
              SyncAction, SourceSystem, RecordStatus, ErrorMessage)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,

@@ -27,7 +27,7 @@ def write_csv(mapped_records: List[dict], mapping: List[FieldMapping], path: Pat
 
 
 def build_csv_filename(job_id: str, run_date) -> str:
-    """demandbase_opportunity_import_YYYYMMDD_<JobId>.csv
+    """demandbase_oppConsumption_import_YYYYMMDD_<JobId>.csv
 
     The JobId suffix is what resolves the same-day collision case from §10
     (rather than the "one run per day" alternative), since JobId is unique
@@ -36,4 +36,4 @@ def build_csv_filename(job_id: str, run_date) -> str:
     """
     date_str = run_date.strftime("%Y%m%d")
     safe_job_id = str(job_id).replace("/", "_").replace("\\", "_")
-    return f"demandbase_opportunity_import_{date_str}_{safe_job_id}.csv"
+    return f"demandbase_oppConsumption_import_{date_str}_{safe_job_id}.csv"

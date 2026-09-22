@@ -2,36 +2,69 @@
 #
 # *** DO NOT GO LIVE WITH THIS FILE UNCHANGED. ***
 #
-# `source_field` values below are PLACEHOLDERS (prefixed CHANGEME__) because
-# this file was authored without a live connection to
-# [marketing_bi].[EDA-268].[vw__demandbase_Opportunity_import]. The build
-# prompt is explicit that column names must never be guessed.
-#
 # Before first run in any environment:
 #   1. Run `python scripts/introspect_view_schema.py --env <env>` (see
 #      README) to print the view's real columns.
-#   2. Replace every CHANGEME__... value below with the matching real column.
+#   2. Replace every source_field... value below with the matching real column.
 #   3. Run the app once -- validate_mapping() in mapping.py will refuse to
 #      start if any source_field still doesn't exist in the view, which also
-#      catches any CHANGEME__ placeholder left behind by mistake.
+#      catches any source_field placeholder left behind by mistake.
 #
-# `target_field` values are the 25 Demandbase field names exactly as given in
-# the build prompt. FLAGGED OPEN ITEM (see README): fields with spaces or
-# punctuation ("Opportunity Name", "Is Closed?", "Is Won?", "AE Name",
-# "Target Account") may be literal CSV headers Demandbase expects, or they
-# may be display labels standing in for different machine keys. Changing
+# `target_field` values are the  Demandbase field names  Changing
 # them is a one-line edit per row below -- nothing else in the codebase
 # needs to change.
 
 - source_field: SFDC_OpportunityId
-  target_field: recordTypeId
+  target_field: Opportunity ID
   transform: none
   required: true
-#
-#- source_field: CHANGEME__Account_Name
-#  target_field: account_name
-#  transform: none
-#  required: true
+
+- source_field: SFDC_OppName
+  target_field: Opportunity Name
+  transform: none
+  required: true
+
+- source_field: SFDC_OppType
+  target_field: Type
+  transform: none
+  required: false
+  default: ""
+
+- source_field: CreatedDate
+  target_field: Created Date
+  transform: "date_format:%Y-%m-%d"
+  required: true
+
+- source_field: OwnerEmail
+  target_field: Owner
+  transform: none
+  required: true
+  default: ""
+
+- source_field: SFDC_AccountId
+  target_field: External Account ID
+  transform: none
+  required: false
+  default: ""
+
+- source_field: AccountName
+  target_field: Account Name
+  transform: none
+  required: true
+
+- source_field: PipelineConsumption
+  target_field: Projected Total Consumption Revenue
+  transform: decimal_round_2
+  required: false
+  default: 0.0
+
+#- source_field: AmountConsumption
+#  target_field: Active MRR/Consumption
+#  transform: decimal_round_2
+#  required: false
+#  default: 0.0
+
+
 #
 #- source_field: CHANGEME__Account_Domain
 #  target_field: account_domain
@@ -45,11 +78,7 @@
 #  required: false
 #  default: ""
 #
-#- source_field: CHANGEME__Opportunity_Type
-#  target_field: Type
-#  transform: none
-#  required: false
-#  default: ""
+
 #
 #- source_field: CHANGEME__Service_Type
 #  target_field: service_type
@@ -63,15 +92,6 @@
 #  required: false
 #  default: ""
 #
-#- source_field: CHANGEME__Opportunity_Name
-#  target_field: Opportunity Name
-#  transform: none
-#  required: true
-#
-#- source_field: CreatedDate
-#  target_field: Created Date
-#  transform: "date_format:%Y-%m-%d"
-#  required: true
 #
 #- source_field: CHANGEME__Expected_Close_Date
 #  target_field: expected_close
@@ -108,11 +128,7 @@
 #  required: false
 #  default: 0.0
 
-- source_field: AmountConsumption
-  target_field: amount_consumption_tbd
-  transform: decimal_round_2
-  required: false
-  default: 0.0
+
 
 #- source_field: CHANGEME__Amount_ProServ
 #  target_field: amount_proserv
@@ -126,11 +142,7 @@
 #  required: false
 #  default: 0.0
 
-- source_field: PipelineConsumption
-  target_field: projectedTotalConsumptionRevenue__c
-  transform: decimal_round_2
-  required: false
-  default: 0.0
+
 
 #- source_field: CHANGEME__Pipeline_ProServe
 #  target_field: pipeline_proserve
@@ -144,11 +156,7 @@
 #  required: false
 #  default: ""
 #
-#- source_field: CHANGEME__Owner_Name
-#  target_field: Owner
-#  transform: none
-#  required: false
-#  default: ""
+
 #
 #- source_field: CHANGEME__Probability
 #  target_field: Probability

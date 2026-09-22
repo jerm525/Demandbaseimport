@@ -19,7 +19,7 @@ database:
 demandbase:
   base_url: "https://uapi.demandbase.com"
   token_env_var: "DEMANDBASE_API_TOKEN_PROD"
-  max_records_per_batch: 1000
+  max_records_per_batch: 25
   create_job_on_empty_changeset: false
 
 watermark:

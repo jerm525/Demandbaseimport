@@ -125,7 +125,7 @@ def _build_manifest_entries(
     manifest_entries: List[ManifestEntry] = []
 
     for record in records:
-        sfdc_id = record.get("SFDC_ID")
+        sfdc_id = record.get("SFDC_OpportunityId")
         sync_action = _determine_sync_action(record)
         created_date = record.get("CreatedDate")
         last_modified_date = record.get("LastModifiedDate")
@@ -249,7 +249,7 @@ def _outcomes_from_job_result(
                 )
             continue
 
-        if job_result.status == "SUCCESS":
+        if job_result.status == "completed":
             outcomes.append(
                 audit.RecordOutcome(
                     sfdc_opportunity_id=entry.sfdc_opportunity_id,
