@@ -52,6 +52,12 @@
   transform: none
   required: true
 
+- source_field: Domain
+  target_field: Account Domain
+  transform: none
+  required: false
+  default: ""
+
 - source_field: PipelineConsumption
   target_field: Projected Total Consumption Revenue
   transform: decimal_round_2
@@ -66,11 +72,7 @@
 
 
 #
-#- source_field: CHANGEME__Account_Domain
-#  target_field: account_domain
-#  transform: none
-#  required: false
-#  default: ""
+
 #
 #- source_field: CHANGEME__Customer_Type
 #  target_field: customer_type
